@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MasterMind-Game</title>
+        <script type='text/javascript'>
+            function draw_board() {
+                const tbl = document.getElementById("masterMindBoard");
+
+                let dimension = 8;
+                for (let i = 0; i < dimension; i++) {
+                    const tbl_row = document.createElement("tr");
+                    for (let j = 0; j < 4; j++) {
+                        const tbl_col = document.createElement("TD");
+                        document.addEventListener('DOMContentLoaded', function() {
+                            tbl_col.innerHTML = '<img src="' + 'pictures/red_ball.png' + '">';
+                        });  
+                        tbl_row.appendChild(tbl_col);
+                    }
+                    tbl.appendChild(tbl_row);
+
+                }
+                console.log(tbl);
+            }
+            draw_board();
+        </script>
+    </head>
+
+    <body>
+        <div>
+            <table>
+                <tr>
+                    <td>
+                        <table  id='masterMindBoard'> </table>
+                    </td>
+                    <td>
+                        Text
+                    </td>
+                </tr>
+            </table>
+            
+        </div>
+
+
+        
+    </body>
+</html>
+
+
+
+
+
+<table border="1">
+    <thead>
+        <tr>
+            <th> </th>
+            <th> </th>
+        </tr>
+        <tr>
+            <th> </th>
+            <th> </th>
+        </tr>
+        <tr>
+            <th> </th>
+       
+<th> </th>
+        </tr>
+        <tr>
+            <th> </th>
+            <th> </th>
+        </tr>
+        
+    </thead>
+
+</table>
+
+**
+
+
+document.getElementById('buttonVerification').addEventListener('click', verification(Try));// try is an array of 4 'boules' describing the player's try
+document.getElementById('photo').innerText='<img src=\"'+E.getImage()+'\">';
+
+
+
+// Function that selects 4 random colors in order to generate the combination
+function generation() {
+    const colors = [R, B, K, W, P, G, Y, O];
+    const combination = [];
+    for (let i = 0; i < 4; i++) {
+        // generation of random index 
+        let index = Math.floor(Math.random() * colors.length);
+        combination.push(colors[index]);
+    }
+    return combination;
+}
+
+
+function verification(Try) {     //returns the numbers of pions: Note that if redPions==4 then the game must end
+    let redPion = 0;
+    let whitePion = 0;
+    let combinationCopy = combination.cloneDeep();
+
+    for (let i = 0; i < 4; i++) {
+        if (combinationCopy[i] == Try[i]) {
+            redPion++;
+            combinationCopy[i] = 'E';
+        }
+    }
+    for (let i = 0; i < 4; i++) {
+        for (let j = 0; j < 4; j++) {
+            if (combinationCopy[i] == Try[j]) {
+                whitePion++;
+                combinationCopy[i] = 'E';
+            }
+        }
+    }
+    return redPion, whitePion;
+
+}
+
+
+//select the game mode depending on which button is pressed on the main page
+function game_mode(difficulty) {
+    if (difficulty = "Easy Mode") {
+        dimension = 15;
+    } else if (difficulty = "Normal Mode") {
+        dimension = 12;
+    } else if (difficulty = "Hard Mode") {
+        dimension = 8;
+    }
+    window.open("game.html", "_self");
+    //fonction qui ferme la page index.html
+    //fonction qui démarre le jeu
+}

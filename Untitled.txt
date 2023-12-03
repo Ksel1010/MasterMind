@@ -1,0 +1,11 @@
+Fonctions:
+    1/Generation aléatoire -> Done 
+    2/Verification de la combinaison (eventlistener) -> Done 
+    3/Saisie
+    4/Renvoi des pions après vérification
+    5/Dessin de lignes
+    6/fonction pour refaire le jeu
+    7/Fonction qui englobe tout le jeu (pour pouvoir faire le 'recommencer' et le 'commencer')
+    8/3 modes de jeu (à choisir dès la première page)
+
+lien utile:https://go.codetogether.com/#/82966e67-008f-424c-b2ab-2400d45ec56c/766dmmCzeRwJ13myc3lt5n

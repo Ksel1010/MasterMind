@@ -1,6 +1,6 @@
 export class Boule {
-    constructor(image, color) {
-        this.image = image;
+    constructor(imagePath, color) {
+        this.image = imagePath;
         this.color = color;
     }
     getColor() {
@@ -37,5 +37,5 @@ export let E = new Boule("pictures/empty_ball.png", 'empty');
 //DO NOT ASSIGN VALUE OUTSIDE OF GAME_MODE FUNCTION! 
 //STOP DELETING THIS COMMENT!!!
 export let dimension=8;
-
+export const coloredBoules={R,B,K,W,P,G,Y,O};
 //export { Boule, Position, R, B, K, W, P, G, Y, Y, O, E, dimension };

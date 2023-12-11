@@ -1,17 +1,16 @@
 <DOCTYPE!>
     <html>
-        
+
     <head>
         <title>Mastermind-HomePage</title>
         <link href="mmind.css" rel="stylesheet">
-        <script src="project.js" defer></script>
     </head>
 
     <body style="text-align:center" style="vertical-align:middle">
         <header>
             <h1>MasterMind</h1>
         </header>
-       
+
         <main>
             <!-- Three buttons for three game modes, what changes is the number of tries (12, 10, 8 respectively)-->
             <input id="easy" name="easy" type="button" value="Easy Mode" onclick="game_mode(this.value)">
@@ -24,6 +23,22 @@
         <footer>
             <p>Created by Ons Baroudi, Sami-Koe Ferreira, Natalia Myasnikova, Kais Sellami.</p>
         </footer>
+
+        <script type="module" src="GUI.js" defer></script>
+        <script type="module" src="GUI.js"></script>
+        <script>
+            //adding click type event listener for easy mode input
+            const e_input = document.getElementById("easy");
+            e_input.addEventListener("click", game_mode());
+
+            //adding click type event listener for normal mode input
+            const n_input = document.getElementById("normal");
+            n_input.addEventListener("click", game_mode());
+
+            //adding click type event listener for hard mode input
+            const h_input = document.getElementById("hard");
+            h_input.addEventListener("click", game_mode());
+        </script>
     </body>
 
     </html>

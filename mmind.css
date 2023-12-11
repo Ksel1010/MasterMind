@@ -1,6 +1,7 @@
 body{
     background: rgb(206, 206, 161);
 }
+
 .mastermind{
     font-family: "optima",sans-serif ;
     padding: 1em;
@@ -15,6 +16,7 @@ body{
     height:80px;
     margin:40px ;
 }
+
 .board{
     display:  grid;
     flex-direction:column ;

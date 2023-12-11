@@ -9,6 +9,9 @@ export class Boule {
     getImage() {
         return (this.image);
     }
+    setImage(im){
+        this.image=im;
+    }
 
 };
 
@@ -32,6 +35,7 @@ export let G = new Boule("pictures/green_ball.png", 'green');
 export let Y = new Boule("pictures/yellow_ball.png", 'yellow');
 export let O = new Boule("pictures/orange_ball.png", 'orange');
 export let E = new Boule("pictures/empty_ball.png", 'empty');
+
 
 //number of rows for the board based on difficulty
 //DO NOT ASSIGN VALUE OUTSIDE OF GAME_MODE FUNCTION! 

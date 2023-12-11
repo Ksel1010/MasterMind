@@ -1,5 +1,6 @@
 import { Boule, Position,coloredBoules, R, B, K, W, P, G, Y, O, E, dimension } from './constants.js';
 
+let attempt=1;
 //function when an image is clicked
 function clickedBoule(ele){
     console.log(ele);
@@ -40,6 +41,9 @@ function draw_board() {
             img.height = 50; 
 
             tbl_col.appendChild(img);
+            img.addEventListener('click',function(){
+
+            });
             tbl_row.appendChild(tbl_col);
         }
         tbl.appendChild(tbl_row);

@@ -9,3 +9,4 @@ Fonctions:
     8/3 modes de jeu (à choisir dès la première page)
 
 lien utile:https://go.codetogether.com/#/82966e67-008f-424c-b2ab-2400d45ec56c/766dmmCzeRwJ13myc3lt5n
+afin d'exécuter le code, utilisez la commande python -m http.server 8000 puis allez sur le navigateur et tapez http://localhost:8000/game.html 

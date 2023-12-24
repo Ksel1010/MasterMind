@@ -1,27 +1,22 @@
 import { Boule, Position, coloredBoules, R, B, K, W, P, G, Y, O, E, dimension } from './constants.js';
 
-let attempt = 1;
+let attempt = 0;
 let chosenBoule = new Boule("pictures/empty_ball.png", 'empty');
 let combination = [];
-let Try = [E, E, E, E];
+let Try = ['E', 'E', 'E', 'E'];
 
-var Tab = [E, E, E, E];
 
 let current_color= '';
 let state = false;
 
-//adding click type event listener for verification button (in game.html)
-const button = document.getElementById("buttonVerification");
-button.addEventListener("click", answer());
+
+
 
 //func = [E,E,E,E]  tion when an image is clicked
 function clickedBoule(ele) {
     state = true;
     current_color=ele;
 
-    for (var i = 0; i < 4; i++) {
-        console.log(Tab[i]);
-    }
 }
 
 //function that changes the images in the table with the clicked ones
@@ -37,12 +32,10 @@ function change(cell, nb_col) {
         cell.innerHTML = "";
         cell.appendChild(img);
 
-        Tab[nb_col]=maBoule;
+        Try[nb_col]=current_color;
 
         state = false;
-        for (var i = 0; i < 4; i++) {
-            console.log(Tab[i]);
-        }
+        
     }
 
     
@@ -70,10 +63,29 @@ function getBoule(nomVariable) {
     }
 }
 
-//function button verification
-function verifier() {
-    alert('boutton verifie')
+
+function getAliasBoule(nomVariable) {
+    switch (nomVariable) {
+        case R: return 'R';
+            break;
+        case B: return 'B';
+            break;
+        case W: return 'W';
+            break;
+        case P: return 'P';
+            break;
+        case G: return 'G';
+            break;
+        case Y: return 'Y';
+            break;
+        case O: return 'O';
+            break;
+        case K: return 'K';
+            break;
+
+    }
 }
+
 
 //function replay 
 function replay(attempt) {
@@ -88,14 +100,13 @@ function replay(attempt) {
 //function to add event listener to a line
 function listenLine(line) {
     let tabl = document.getElementById("masterMindBoard");
-    for (var i = 0; i < 4; i++) {
-        change(tabl[i], i);
-        console.log(tabl[i]);
-    };
-    console.log("listenLine");
-
+    for (let i = 0; i < 4; i++) {
+        tabl.rows[line].cells[i].addEventListener('click', function () {
+            change(tabl.rows[line].cells[i], i);
+        });
+    }
+    
 }
-//listenLine(0);
 
 //images of the chosen colors
 let tabColoredBoules = document.getElementById('coloredBoules');
@@ -124,30 +135,34 @@ function generation() {
     for (let i = 0; i < 4; i++) {
         // generation of random index 
         let index = Math.floor(Math.random() * colors.length);
-        combination.push(colors[index]);
+        combination.push(getAliasBoule(colors[index]));
     }
 }
+generation();
+console.log(combination);
 
 function verification() {     //returns the numbers of pions: Note that if redPions==4 then the game must end
     let redPion = 0;
     let whitePion = 0;
-    let combinationCopy = combination;
+    let combinationCopy = combination.slice();
 
     for (let i = 0; i < 4; i++) {
-        if (combinationCopy[i] == Try[i]) {
-            redPion++;
+        if (combinationCopy[i] === Try[i] ) {
+            whitePion++;
             combinationCopy[i] = 'E';
+            Try[i] = 'E';        
         }
     }
     for (let i = 0; i < 4; i++) {
         for (let j = 0; j < 4; j++) {
-            if (combinationCopy[i] == Try[j]) {
-                whitePion++;
-                combinationCopy[i] = 'E';
+            if (combinationCopy[i] === Try[j] && Try[i]!=='E' && combinationCopy[i]!=='E') {
+                redPion++;
+                Try[j] = 'E';  
+                break;       
             }
         }
     }
-    return redPion, whitePion;
+    return [redPion, whitePion];
 }
 
 //select the game mode depending on which button is pressed on the main page
@@ -246,7 +261,12 @@ function draw_pion_table() {
     }
 }
 
-
+document.addEventListener('DOMContentLoaded', (event) => {
+    const button = document.getElementById('buttonVerification');
+    if (button) {
+        button.addEventListener('click', answer);
+    }
+});
 function draw() {
     draw_pion_table();
     draw_board();
@@ -256,40 +276,42 @@ draw();
 
 // Function that displays the pions
 function answer() {
-    let p_tbl_case = document.getElementById("pionsTable")[attempt];
-    let numberOfRed;
-    let numberOfWhite;
-    numberOfRed, numberOfWhite = verification();
-    //drawCellPions(p_tbl_case, numberOfRed, numberOfWhite);
-    const imgR = new Image();
-    imgR.src = R.getImage();
-    const imgW = new Image();
-    imgW.src = W.getImage();
-    for (let i = 0; i < 2; i++) {
-        for (let j = 0; j < 2; j++) {
-            if (numberOfRed > 0) {
-                p_tbl_case[i][j].innerHTML = "";
-                p_tbl_case[i][j].appendChild(imgR);
-                numberOfRed--;
-            }
-            else {
-                if (numberOfRed == 0 && numberOfWhite > 0) {
-                    p_tbl_case[i][j].innerHTML = "";
-                    p_tbl_case[i][j].appendChild(imgW);
-                    numberOfWhite--;
-                }
-            }
+    let isOneBouleEmpty=false;
+    for (let i=0;i<4;i++){
+        if (Try[i]=='E'){
+            isOneBouleEmpty=true;
+            break;
         }
     }
+    if (isOneBouleEmpty){
+        alert('you should finish your try first');
+    }
+    else{
+        let p_tbl_case = document.getElementById("pionsTable");
 
-    //if there are 4 red pions, the combination has been guessed, the game is over
-    if (is_game_over()) {
-        alert("You won! You truly are the MasterMind.");
-        //renvoyer sur une page de fin de jeu
-        //renvoyer a l'acceuil
-    } else {
-        attempt += 1;
-        Try=[E,E,E,E];
+        let pions = verification();
+        let numberOfRed=pions[0];
+        let numberOfWhite=pions[1];
+        const imgR = new Image();
+        imgR.src = R.getImage();
+        const imgW = new Image();
+        imgW.src = W.getImage();
+        console.log('white:'+numberOfWhite+'   red:'+numberOfRed);
+        if (numberOfWhite==4) {
+            drawCellPions(p_tbl_case.rows[attempt].cells[0],numberOfRed,numberOfWhite);            
+            alert("You won! You truly are the MasterMind.");
+        }
+        else{
+            drawCellPions(p_tbl_case.rows[attempt].cells[0],numberOfRed,numberOfWhite);            
+            if(is_game_over()==true){
+                alert('you lost!! play again?');
+            }
+            else{
+                attempt += 1;
+                Try=['E','E','E','E'];
+                listenLine(attempt);
+        }
+        }
     }
 }
 
@@ -307,17 +329,18 @@ function game_start() {
     //we generate a new combination
     generation();
 
+
     //we give the default values to important variables again
-    attempt = 1;
+    attempt = 0;
     chosenBoule.image = "pictures/empty_ball.png";
     chosenBoule.color = 'E';
-    Try = [E, E, E, E];
+    Try = ['E', 'E', 'E', 'E'];
 }
 
 //checks if the game is over or not
 function is_game_over() {
     //combination guessed or too many attempts compared to difficulty
-    if (combination == Try || attempt > dimension) {
+    if ( attempt >= (dimension-1)) {
         return true;
     } else {
         return false;

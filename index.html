@@ -13,9 +13,9 @@
 
         <main>
             <!-- Three buttons for three game modes, what changes is the number of tries (12, 10, 8 respectively)-->
-            <input id="easy" name="easy" type="button" value="Easy Mode" onclick="game_mode(this.value)">
-            <input id="normal" name="normal" type="button" value="Normal Mode" onclick="game_mode(this.value)">
-            <input id="hard" name="hard" type="button" value="Hard Mode" onclick="game_mode(this.value)">
+            <input id="easy" name="easy" type="button" value="Easy Mode" >
+            <input id="normal" name="normal" type="button" value="Normal Mode" >
+            <input id="hard" name="hard" type="button" value="Hard Mode" >
         </main>
 
         <hr>
@@ -24,20 +24,31 @@
             <p>Created by Ons Baroudi, Sami-Koe Ferreira, Natalia Myasnikova, Kais Sellami.</p>
         </footer>
 
-        <script type="module" src="GUI.js" defer></script>
-        <script type="module" src="GUI.js"></script>
-        <script>
+        <script  type="module">
+            import {getDimension , setDimension} from './constants.js';
+
             //adding click type event listener for easy mode input
             const e_input = document.getElementById("easy");
-            e_input.addEventListener("click", game_mode());
+            e_input.addEventListener("click", function(){
+                setDimension(15);
+                window.open("game.html", "_self");
+            });
 
             //adding click type event listener for normal mode input
             const n_input = document.getElementById("normal");
-            n_input.addEventListener("click", game_mode());
+            n_input.addEventListener("click", function(){
+                setDimension(12);
+                window.open("game.html", "_self");
+            });
 
             //adding click type event listener for hard mode input
             const h_input = document.getElementById("hard");
-            h_input.addEventListener("click", game_mode());
+            h_input.addEventListener("click", function(){
+                setDimension(8);
+                window.open("game.html", "_self");
+            });
+            
+
         </script>
     </body>
 

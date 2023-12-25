@@ -1,5 +1,16 @@
-import { Boule, Position, coloredBoules, R, B, K, W, P, G, Y, O, E, dimension } from './constants.js';
+import { Boule, Position, coloredBoules, R, B, K, W, P, G, Y, O, E,setDimension, getDimension } from './constants.js';
+const storedDimension = sessionStorage.getItem("dimension");
 
+// Parsing the stored value as a number
+if (storedDimension) {
+    const parsedDimension = parseInt(storedDimension, 10);
+    if (!isNaN(parsedDimension)) {
+        setDimension(parsedDimension);
+    }
+}
+
+let dimension = getDimension();
+console.log('dimension'+dimension);
 let attempt = 0;
 let chosenBoule = new Boule("pictures/empty_ball.png", 'empty');
 let combination = [];
@@ -138,8 +149,6 @@ function generation() {
         combination.push(getAliasBoule(colors[index]));
     }
 }
-generation();
-console.log(combination);
 
 function verification() {     //returns the numbers of pions: Note that if redPions==4 then the game must end
     let redPion = 0;
@@ -165,23 +174,6 @@ function verification() {     //returns the numbers of pions: Note that if redPi
     return [redPion, whitePion];
 }
 
-//select the game mode depending on which button is pressed on the main page
-//then starts the game
-function game_mode(difficulty) {
-    switch (difficulty) {
-        case "Easy Mode":
-            dimension = 15;
-            break;
-        case "Normal Mode":
-            dimension = 12;
-            break;
-        case "Hard Mode":
-            dimension = 8;
-            break;
-    }
-    window.open("game.html", "_self");
-    game_start();
-}
 
 //draws the game board (4 empty balls in each row)
 function draw_board() {
@@ -271,7 +263,6 @@ function draw() {
     draw_pion_table();
     draw_board();
 }
-draw();
 
 
 // Function that displays the pions
@@ -329,6 +320,8 @@ function game_start() {
     //we generate a new combination
     generation();
 
+    //we can print the generated combination to verify
+    console.log(combination);
 
     //we give the default values to important variables again
     attempt = 0;
@@ -346,6 +339,10 @@ function is_game_over() {
         return false;
     }
 }
+
+
+
+game_start();
 
 
 

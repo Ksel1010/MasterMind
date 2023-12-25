@@ -37,7 +37,7 @@ export let O = new Boule("pictures/orange_ball.png", 'orange');
 export let E = new Boule("pictures/empty_ball.png", 'empty');
 
 //number of rows for the board based on difficulty
-let dimension=10;
+let dimension=12;
 //function to change dimension
 export function setDimension(number){
     sessionStorage.setItem("dimension", JSON.stringify(number));

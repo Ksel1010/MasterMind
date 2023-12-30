@@ -1,53 +1,40 @@
 body{
-    background: rgb(206, 206, 161);
-}
-
-.mastermind{
-    font-family: "optima",sans-serif ;
-    padding: 1em;
-    overflow : hidden;
-    position : static ;    
     
-}
-.mastermind-board{
-    font-family: 'Gill Sans', sans-serif ;
-    background-color:#a98e73 ;
-    align-items:center ;
-    height:80px;
-    margin:40px ;
+    background : rgb(245,245,245);
+    vertical-align: middle;
+    text-align: center;
 }
 
-.board{
-    display:  grid;
-    flex-direction:column ;
-    align-items:stretch ;
-}
-.row{
-
-grid-row:1;
-grid-row-start: auto ;
-grid-row-end: 64;
+h1, h2{
+    font-family: "chalkduster" , fantasy;
+    font-weight: bold;
+    font-size: 100;
 }
 
-.pion1{
-    background-color: #FF0000 ;
-    height:20px ;
-    width:10px ;
-    margin: 0; 
-    border-radius: 10px; 
+#structure{
+    padding : 3em 0 0 40%;
 }
-.pion2{
-    background-color:#FFFFFF;
-    height:20px ;
-    width:10px ;
-    margin: 0; 
-    border-radius: 10px; 
+.coloredBoules {
+    position : fixed;
+    left : 50%;
+    transform : translate(-50%);
+    background-color: whitesmoke;
 }
 
-.start-button{
-    line-height: 30px;
-    a{
-      font-size: 20px;
+.masterMindBoard, .pionsTable{
+    border : 1px solid;
+    border-spacing : 0;
+    border-collapse : collapse;
+    border-color : black;
+}
+.masterMindBoard tr, .pionsTable tr{
+    border-color : black;
+    border : 1px solid;
+    border-spacing : 0;
+}
 
-    }
-}RMIND
+#buttonVerification{
+    position : fixed;
+    left : 62%;
+    top : 13%;
+}
